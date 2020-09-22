@@ -13,7 +13,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying ...'
+                script {
+                    if (env.BRANCH_NAME == 'staging') {
+                        echo 'Deploy staging branch'
+                    }
+                    if (env.BRANCH_NAME == 'master') {
+                        echo 'Deploy master branch'
+                    }
+                }
             }
         }
     }
