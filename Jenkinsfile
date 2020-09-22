@@ -11,18 +11,24 @@ pipeline {
                 echo 'Testing ...'
             }
         }
-        stage('Deploy') {
-            when{
-                branch 'master'
-            }
+        stage('Deploy master') {
             steps {
-                echo 'run this stage - ony if the branch = master branch'
+                when {
+                    branch 'master'
+                }
+                script {
+                    echo 'I only execute on the master branch'    
+                }
             }
-            when{
-                branch 'staging'
-            }
+        }
+        stage('Deploy staging') {
             steps {
-                echo 'run this stage - ony if the branch = staging branch'
+                when {
+                    branch 'staging'
+                }
+                script {
+                    echo 'I only execute on the staging branch'    
+                }
             }
         }
     }
