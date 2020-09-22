@@ -12,15 +12,17 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when{
+                branch 'master'
+            }
             steps {
-                script {
-                    if (env.BRANCH_NAME == 'staging') {
-                        echo 'Deploy staging branch'
-                    }
-                    if (env.BRANCH_NAME == 'master') {
-                        echo 'Deploy master branch'
-                    }
-                }
+                echo 'run this stage - ony if the branch = master branch'
+            }
+            when{
+                branch 'staging'
+            }
+            steps {
+                echo 'run this stage - ony if the branch = staging branch'
             }
         }
     }
