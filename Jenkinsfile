@@ -11,24 +11,20 @@ pipeline {
                 echo 'Testing ...'
             }
         }
-        stage('Deploy master') {
+        stage('Deliver for development') {
+            when {
+                branch 'development' 
+            }
             steps {
-                when {
-                    branch 'master'
-                }
-                script {
-                    echo 'I only execute on the master branch'    
-                }
+                echo 'development'
             }
         }
-        stage('Deploy staging') {
+        stage('Deploy for production') {
+            when {
+                branch 'master'  
+            }
             steps {
-                when {
-                    branch 'staging'
-                }
-                script {
-                    echo 'I only execute on the staging branch'    
-                }
+                echo 'master'
             }
         }
     }
